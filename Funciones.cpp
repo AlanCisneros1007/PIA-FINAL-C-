@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string>
 #include <cstdio>
+#include <ctype.h>
 
 using namespace std;
 
@@ -15,7 +16,7 @@ Personas registros[50];
 
 void Lectura(char narch[60]) {
 	ifstream archivo;
-	int clavemaquina = 0;
+	int clavemaquina = 0, fail = 0;
 	char nm[30] = ""; char np[30] = ""; char nc[11] = ""; char ce[40] = "";
 	bool yaExiste = false;
 	string correo;
@@ -35,7 +36,10 @@ void Lectura(char narch[60]) {
 			if (registros[i].clavemaquina == 0 && i < 50) {
 				yaExiste = false;
 				clavemaquina = 0;
+				
 				archivo >> clavemaquina;
+				
+				
 				if (clavemaquina != 0) {
 					archivo >> nm;
 					archivo >> np;
@@ -50,19 +54,27 @@ void Lectura(char narch[60]) {
 					}
 				}
 
-				if (validarCorreo(ce) == 0) {
+				if (validarCorreo(ce,1) == 0 ) {
 					cout << "Correo equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
 				}
 
-				if (validarCadena(nm) == 0) {
+				if (validarCadena(nm) == 0 ) {
 					cout << "Nombre de la maquina equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
 				}
 
-				if (validarCadena(np) == 0) {
+				if (validarCadena(np) == 0 ) {
 					cout << "Nombre de proveedor equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
 				}
 
-				if (validarCorreo(ce) && validarCadena(nm) && validarCadena(np) == 1 && yaExiste == false && clavemaquina != 0) {
+				if (validarTelefono(nc) == 0 ) {
+					cout << "Telefono equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
+				}
+
+				if (clavemaquina!= 0 && validarRangoClave(clavemaquina) == 0) {
+					cout << "Clave no está en el rango requerido [XXXX] en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
+				}
+
+				if (validarRangoClave(clavemaquina) && validarCorreo(ce,0) && validarCadena(nm) && validarCadena(np) == 1 && yaExiste == false && clavemaquina != 0 && validarTelefono(nc)==1 ) {
 					registros[i].clavemaquina = clavemaquina;
 					strcpy_s(registros[i].nombremaquina, nm);
 					strcpy_s(registros[i].nombreproveedor, np);
@@ -83,7 +95,7 @@ void Lectura(char narch[60]) {
 	archivo.close();
 }
 
-int pedirOpcion() {
+int pedirOpcion(int minimo, int maximo, char mensaje[40]) {
 	int op;
 	bool letra = false;
 	cout << "Ingresa una opcion: ";
@@ -98,15 +110,15 @@ int pedirOpcion() {
 		}
 		std::cin.ignore(std::numeric_limits<int>::max(), '\n');
 
-		if ((op < 1 || op>6) && letra == true) {
-			std::cout << "ERROR: Introduce la opcion a realizar: ";
+		if ((op < minimo || op>maximo) && letra == true) {
+			std::cout << mensaje;
 		}
 
-		if ((op < 1 || op>6) && letra == false) {
-			std::cout << "ERROR: Introduce la opcion a realizar: ";
+		if ((op < minimo || op>maximo) && letra == false) {
+			std::cout << mensaje;
 		}
 
-	} while (letra == true || op < 1 || op>6);
+	} while (letra == true || op < minimo || op>maximo);
 
 	return op;
 
@@ -120,7 +132,7 @@ bool validarCadena(char cadena[]) {
 	return valCadena;
 }
 
-bool validarCorreo(char correo[40]) {
+bool validarCorreo(char correo[40], bool mensajes) {
 	bool validar = false;
 	bool validarCorreo = false;
 	bool validarArroba = false;
@@ -145,6 +157,7 @@ bool validarCorreo(char correo[40]) {
 			validarCorreo = true;
 		}
 		else {
+			if(mensajes==1)
 			cout << "Proveedor equivocado. " << endl;
 		}
 	}
@@ -152,15 +165,19 @@ bool validarCorreo(char correo[40]) {
 	for (int i = 0; i < strlen(correo); i++) {
 		if (isupper(correo[i])) {
 			validarMayus = true;
-			cout << "SE ENCONTRARON MAYUSCULAS EN EL CORREO. " << endl;
+			if (mensajes == 1)
+			cout << "Se encontraron mayusculas en el correo. " << endl;
 		}
 	}
 
 	if (founda != std::string::npos) {
-		if (founda > 2 && founda < 15)
+		if (founda > 2 && founda < 15) {
 			validarArroba = true;
-		else
-			cout << "El correo no cumple la cantidad de caracteres aceptados. Min 2 , Max 20";
+		}
+		else {
+			if (mensajes == 1)
+			cout << "El correo no cumple la cantidad de caracteres aceptados. Min 2 , Max 20. " << endl;
+		}
 	}
 
 	for (int i = foundc + 4; i < strlen(correo); i++) {
@@ -177,14 +194,16 @@ bool validarCorreo(char correo[40]) {
 
 void localizarPorProveedor(char nombreProovedor[30]) {
 	bool encontrado = false;
+	cout << "Aqui estan los registros encontrados del proveedor " << nombreProovedor<<". \n" << endl;
 	for (int x = 0; x < 50; x++) {
 		if (strcmp(registros[x].nombreproveedor, nombreProovedor) == 0) {
-			cout << "Lugar" << x << endl;
-			cout << "Clave de la maquina: " << registros[x].clavemaquina << endl;
-			cout << "Nombre de la maquina: " << registros[x].nombremaquina << "\n";
-			cout << "Nombre de proveedor: " << registros[x].nombreproveedor << "\n";
-			cout << "Numero de celular: " << registros[x].numerocelular << "\n";
-			cout << "E-mail: " << registros[x].correoelectronico << "\n";
+			cout << "----------------------------------------------------------\n";
+			cout << "\tClave de la maquina: " << registros[x].clavemaquina << endl;
+			cout << "\tNombre de la maquina: " << registros[x].nombremaquina << "\n";
+			cout << "\tNombre de proveedor: " << registros[x].nombreproveedor << "\n";
+			cout << "\tNumero de celular: " << registros[x].numerocelular << "\n";
+			cout << "\tE-mail: " << registros[x].correoelectronico << "\n";
+			cout << "----------------------------------------------------------\n";
 			cout << "\n";
 			encontrado = true;
 		}
@@ -199,12 +218,14 @@ void localizarPorProveedor(char nombreProovedor[30]) {
 void localizar(int clave) {
 	bool encontrado = false;
 	for (int i = 0; i < 50; i++) {
-		if (registros[i].clavemaquina == clave) {
-			cout << "Clave de la maquina: " << registros[i].clavemaquina << '\n';
-			cout << "Nombre de la maquina: " << registros[i].nombremaquina << '\n';
-			cout << "Nombre proveedor: " << registros[i].nombreproveedor << '\n';
-			cout << "Numero de celular: " << registros[i].numerocelular << '\n';
-			cout << "E-Mail: " << registros[i].correoelectronico << '\n';
+		if (registros[i].clavemaquina == clave && clave!=0) {
+			cout << "----------------------------------------------------------\n";
+			cout << "\tClave de la maquina: " << registros[i].clavemaquina << '\n';
+			cout << "\tNombre de la maquina: " << registros[i].nombremaquina << '\n';
+			cout << "\tNombre proveedor: " << registros[i].nombreproveedor << '\n';
+			cout << "\tNumero de celular: " << registros[i].numerocelular << '\n';
+			cout << "\tE-Mail: " << registros[i].correoelectronico << '\n';
+			cout << "----------------------------------------------------------\n";
 			encontrado = true;
 		}
 	}
@@ -221,12 +242,13 @@ void Baja(int clave) {
 	for (int i = 0; i < 50; i++) {
 
 		if (registros[i].clavemaquina == clave && clave != 0) {
-			
-			cout << registros[i].clavemaquina<<endl;
-			cout << registros[i].nombremaquina<<endl;
-			cout << registros[i].nombreproveedor<<endl;
-			cout << registros[i].numerocelular<<endl;
-			cout << registros[i].correoelectronico<<endl;
+			cout << "----------------------------------------------------------\n";
+			cout <<"\tClave de maquina: "<< registros[i].clavemaquina<<endl;
+			cout << "\tNombre de maquina: " << registros[i].nombremaquina<<endl;
+			cout << "\tNombre de proveedor: " << registros[i].nombreproveedor<<endl;
+			cout << "\tNumero celular: " << registros[i].numerocelular<<endl;
+			cout << "\tCorreo electronico: " << registros[i].correoelectronico<<endl;
+			cout << "----------------------------------------------------------\n";
 
 			registros[i].clavemaquina = 0;
 			strcpy_s(registros[i].nombremaquina, vacio);
@@ -279,7 +301,7 @@ void OrdenamientoNombre() {
 	char aux2[30] = "", aux3[30] = "", aux4[11] = "", aux5[40] = "";
 
 	for (i = 0; i < 50; i++) {
-		for (j = 0; j < 50; j++) {
+		for (j = 0; j < 49; j++) {
 			if (strcmp(registros[j].nombreproveedor, registros[j + 1].nombreproveedor) > 0) {
 				aux = registros[j].clavemaquina;
 				strcpy_s(aux2, registros[j].nombremaquina);
@@ -305,15 +327,16 @@ void OrdenamientoNombre() {
 void imprimirRegistros() {
 	for (int i = 0; i < 50; i++) {
 		if (registros[i].clavemaquina != 0) {
-			cout << "Posicion [" << i << "]" << endl;
-			cout << "Clave de la maquina: " << registros[i].clavemaquina << '\n';
-			cout << "Nombre de la maquina: " << registros[i].nombremaquina << '\n';
-			cout << "Nombre proveedor: " << registros[i].nombreproveedor << '\n';
-			cout << "Numero de celular: " << registros[i].numerocelular << '\n';
-			cout << "E-Mail: " << registros[i].correoelectronico << '\n' << endl;
+			cout << "----------------------------------------------------------\n";
+			std::cout << "\tClave de la maquina: " << registros[i].clavemaquina << '\n';
+			std::cout << "\tNombre de la maquina: " << registros[i].nombremaquina << '\n';
+			std::cout << "\tNombre proveedor: " << registros[i].nombreproveedor << '\n';
+			std::cout << "\tNumero de celular: " << registros[i].numerocelular << '\n';
+			std::cout << "\tE-Mail: " << registros[i].correoelectronico << '\n';
+			cout << "----------------------------------------------------------\n";
+			cout<< endl<<endl;
 		}
 	}
-
 
 };
 
@@ -339,6 +362,7 @@ void archivoClaveProov() {
 }
 
 void archivoNombreProveedor() {
+	
 	archivo.open("nombre-proveedor.txt", ios::out);
 
 	if (archivo.fail()) {
@@ -364,7 +388,7 @@ void registrarMaquinas(int noUsu) {
 	bool yaExiste = false, registrado = false;
 	char nm[30] = ""; char np[30] = ""; char nc[11] = ""; char ce[40] = "",nombretxt[40] = "";
 	cout << "Ingrese el nombre del .txt a generar: ";
-	cin.getline(nombretxt, 40, '\n');
+	cin.getline(nombretxt, 40, '\n'); cout << '\n';
 
 	//remove("alan.txt");
 	archivo.open(nombretxt, ios::out);
@@ -373,9 +397,9 @@ void registrarMaquinas(int noUsu) {
 		cout << "No se puede abrir el archivo. " << endl;
 	}
 
-	do {
+	while (i < noUsu){
 		cout << "Ingrese clave de maquina [1xxx]: ";
-		cin >> clavemaquina; cin.ignore();
+		cin >> clavemaquina; cin.ignore(); cout << "\n";
 		cout << "Ingrese nombre de maquina: ";
 		cin.getline(nm, 30, '\n');
 		cout << "Ingrese nombre del proveedor: ";
@@ -389,8 +413,8 @@ void registrarMaquinas(int noUsu) {
 			if (clavemaquina == registros[x].clavemaquina) yaExiste = true;
 		}
 
-		if (validarCorreo(ce) == 0) {
-			cout << "Correo equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
+		if (validarCorreo(ce,1) == 0) {
+			cout << "Correo equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl<<endl;
 		}
 
 		if (validarCadena(nm) == 0) {
@@ -401,20 +425,54 @@ void registrarMaquinas(int noUsu) {
 			cout << "Nombre de proveedor equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
 		}
 
-		if (validarCorreo(ce) && validarCadena(nm) && validarCadena(np) == 1 && yaExiste == false && clavemaquina != 0) {
-			archivo << "Nombre proveedor: " << np << '\n';
-			archivo << "Clave de la maquina: " << clavemaquina << '\n';
-			archivo << "Nombre de la maquina: " << nm << '\n';
-			archivo << "Numero de celular: " << nc << '\n';
-			archivo << "E-Mail: " << ce << '\n' << endl;
-			cout << "Maquina [" << clavemaquina << "] registrada en posicion [" << i << "]" << endl;
+		if (validarTelefono(nc) == 0) {
+			cout << "Telefono equivocado en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
+		}
+
+		if (clavemaquina != 0 && validarRangoClave(clavemaquina) == 0) {
+			cout << "Clave no está en el rango requerido [XXXX] en la maquina con clave [" << clavemaquina << "]. Corriga para poder registrarla. " << endl;
+		}
+		cout << "\n";
+		if (validarCorreo(ce,0) && validarRangoClave(clavemaquina) && validarCadena(nm) && validarCadena(np) == 1 && yaExiste == false && clavemaquina != 0 && validarTelefono(nc)==1) {
+			archivo << clavemaquina << " ";
+			archivo << nm << " ";
+			archivo << np << " ";
+			archivo << nc << " ";
+			archivo << ce << '\n' << endl;
+			cout << "Maquina [" << clavemaquina << "] registrada en posicion [" << i << "]" << endl<<endl;
 			registrado = true;
 			i++;
 		}		
 
-	} while (registrado == false && i<noUsu);
+	}
 	
 	archivo.close();
 	cout << "Archivo creado con exito ......";
 
 };
+
+bool validarTelefono(char telefono[11]){
+	bool valido = true;
+
+	for (int i = 0; i < strlen(telefono); i++) {
+		if (isdigit(telefono[i])) {
+		}
+		else {
+			valido = false;
+		}
+	}
+
+	if (strlen(telefono) < 10) {
+		valido = false;
+	}
+
+	return valido;
+};
+
+bool validarRangoClave(int clave) {
+	bool claveValida = false;
+	if (clave > 999 && clave < 10000)
+		claveValida = true;
+
+	return claveValida;
+}

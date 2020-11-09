@@ -1,0 +1,216 @@
+Clave de la maquina: 1950
+Nombre proveedor: CocaCola
+Nombre de la maquina: Maquina-De-Cheetos
+Numero de celular: 86612023
+E-Mail: chester@gmail.com
+
+Clave de la maquina: 1951
+Nombre proveedor: Pepsi
+Nombre de la maquina: Maquina-De-Refrescos
+Numero de celular: 8661302345
+E-Mail: leonel@gmail.com
+
+Clave de la maquina: 1952
+Nombre proveedor: Gamma
+Nombre de la maquina: Maquina-De-Perforacion
+Numero de celular: 81123654
+E-Mail: gamma@gmail.com
+
+Clave de la maquina: 1953
+Nombre proveedor: Gamma
+Nombre de la maquina: Maquina-De-Fresadora
+Numero de celular: 81123655
+E-Mail: contactogamma@gmail.com
+
+Clave de la maquina: 1954
+Nombre proveedor: Sandvik
+Nombre de la maquina: Maquina-De-Taladros
+Numero de celular: 55236578
+E-Mail: andvick@gmail.com
+
+Clave de la maquina: 1955
+Nombre proveedor: Sandvik
+Nombre de la maquina: Maquina-De-Ranurado
+Numero de celular: 55236579
+E-Mail: andvick@gmail.com
+
+Clave de la maquina: 1956
+Nombre proveedor: Sandvick
+Nombre de la maquina: Maquina-De-Roscado
+Numero de celular: 55236570
+E-Mail: sandvick@gmail.com
+
+Clave de la maquina: 1957
+Nombre proveedor: Sandvick
+Nombre de la maquina: Maquina-De-Corte-Industrial
+Numero de celular: 55236580
+E-Mail: sandvick@gmail.com
+
+Clave de la maquina: 1958
+Nombre proveedor: Dewalt
+Nombre de la maquina: Maquina-De-Placas
+Numero de celular: 55263655
+E-Mail: dewalt@gmail.com
+
+Clave de la maquina: 1959
+Nombre proveedor: Dewalt
+Nombre de la maquina: Maquina-De-Sierras
+Numero de celular: 55263656
+E-Mail: sierrasdewalt@gmail.com
+
+Clave de la maquina: 1960
+Nombre proveedor: Dewalt
+Nombre de la maquina: Maquina-De-Esmeriles
+Numero de celular: 55263657
+E-Mail: dewalt@gmail.com
+
+Clave de la maquina: 1961
+Nombre proveedor: Dewalt
+Nombre de la maquina: Maquina-De-LlavesImpacto
+Numero de celular: 55168974
+E-Mail: dewalt@gmail.com
+
+Clave de la maquina: 1962
+Nombre proveedor: AHMSA
+Nombre de la maquina: Maquina-De-PlacaAcero
+Numero de celular: 86665032
+E-Mail: aceroahmsa@gmail.com
+
+Clave de la maquina: 1963
+Nombre proveedor: AHMSA
+Nombre de la maquina: Maquina-De-Laminado
+Numero de celular: 86665033
+E-Mail: ahmsa@gmail.com
+
+Clave de la maquina: 1964
+Nombre proveedor: Bench
+Nombre de la maquina: Maquina-De-Pelotas
+Numero de celular: 86612087
+E-Mail: bench@gmail.com
+
+Clave de la maquina: 1965
+Nombre proveedor: Oro
+Nombre de la maquina: Maquina-De-Discos
+Numero de celular: 8661302363
+E-Mail: discosoro@gmail.com
+
+Clave de la maquina: 1966
+Nombre proveedor: Bic
+Nombre de la maquina: Maquina-De-Plumas
+Numero de celular: 81167654
+E-Mail: bic@gmail.com
+
+Clave de la maquina: 1967
+Nombre proveedor: Bic
+Nombre de la maquina: Maquina-De-Colores
+Numero de celular: 81123915
+E-Mail: bic@gmail.com
+
+Clave de la maquina: 1968
+Nombre proveedor: Roses
+Nombre de la maquina: Maquina-De-Flores
+Numero de celular: 55236278
+E-Mail: roses@gmail.com
+
+Clave de la maquina: 1969
+Nombre proveedor: Econo
+Nombre de la maquina: Maquina-De-Anillos
+Numero de celular: 55237379
+E-Mail: econo@gmail.com
+
+Clave de la maquina: 1970
+Nombre proveedor: Vjewerly
+Nombre de la maquina: Maquina-De-Pulseras
+Numero de celular: 55546570
+E-Mail: vjwerly@gmail.com
+
+Clave de la maquina: 1971
+Nombre proveedor: Rolex
+Nombre de la maquina: Maquina-De-Relojes
+Numero de celular: 55236561
+E-Mail: rolex@gmail.com
+
+Clave de la maquina: 1972
+Nombre proveedor: Bio
+Nombre de la maquina: Maquina-De-Macetas
+Numero de celular: 55263631
+E-Mail: bio@gmail.com
+
+Clave de la maquina: 1973
+Nombre proveedor: Bio
+Nombre de la maquina: Maquina-De-Bolsas
+Numero de celular: 55263622
+E-Mail: bio@gmail.com
+
+Clave de la maquina: 1974
+Nombre proveedor: Sigma
+Nombre de la maquina: Maquina-De-Vasos
+Numero de celular: 55263643
+E-Mail: sigma@gmail.com
+
+Clave de la maquina: 1975
+Nombre proveedor: Sigma
+Nombre de la maquina: Maquina-De-Platos
+Numero de celular: 55168384
+E-Mail: sigma@gmail.com
+
+Clave de la maquina: 1976
+Nombre proveedor: Tool
+Nombre de la maquina: Maquina-De-Llaveros
+Numero de celular: 86665012
+E-Mail: tool@gmail.com
+
+Clave de la maquina: 1977
+Nombre proveedor: Tool
+Nombre de la maquina: Maquina-De-Llaves
+Numero de celular: 85471687
+E-Mail: tool@gmail.com
+
+Clave de la maquina: 1978
+Nombre proveedor: Trupper
+Nombre de la maquina: Maquina-De-Chapas
+Numero de celular: 55546532
+E-Mail: trupper@gmail.com
+
+Clave de la maquina: 1979
+Nombre proveedor: Trupper
+Nombre de la maquina: Maquina-De-Herramienta
+Numero de celular: 55234157
+E-Mail: trupper@gmail.com
+
+Clave de la maquina: 1980
+Nombre proveedor: IZZI
+Nombre de la maquina: Maquina-De-Modems
+Numero de celular: 55269857
+E-Mail: izzi@gmail.com
+
+Clave de la maquina: 1981
+Nombre proveedor: Norma
+Nombre de la maquina: Maquina-De-Libretas
+Numero de celular: 55211622
+E-Mail: norma@gmail.com
+
+Clave de la maquina: 1982
+Nombre proveedor: Rivloy
+Nombre de la maquina: Maquina-De-Marcos
+Numero de celular: 55263611
+E-Mail: rivloy@gmail.com
+
+Clave de la maquina: 1983
+Nombre proveedor: Expresarte
+Nombre de la maquina: Maquina-De-Esculturas
+Numero de celular: 55161617
+E-Mail: expresarte@gmail.com
+
+Clave de la maquina: 1984
+Nombre proveedor: RayBan
+Nombre de la maquina: Maquina-De-Gafas
+Numero de celular: 86345012
+E-Mail: rayban@gmail.com
+
+Clave de la maquina: 1985
+Nombre proveedor: River
+Nombre de la maquina: Maquina-De-Desinfectantes
+Numero de celular: 85471337
+E-Mail: river@gmail.com
+
